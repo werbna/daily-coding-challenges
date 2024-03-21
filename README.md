@@ -22,7 +22,6 @@ To successfully complete these coding challenges, learners should have foundatio
 | **Math and Logic**                         | - Fundamental mathematical concepts and logical problem-solving. |
 | **Array Manipulation**                     | - Skills in iterating, manipulating, and handling arrays. |
 
-
 ## Instructions
 
 1. **Getting Started**:
@@ -39,8 +38,6 @@ To successfully complete these coding challenges, learners should have foundatio
 3. **Save Your Progress**:
     - As you complete challenges, frequently **add** and **commit** your changes to your local repository.
     - **Push** your updates to the GitHub repository regularly to save and share your progress.
-
-
 
 ## Coding Challenges
 
@@ -77,7 +74,6 @@ To successfully complete these coding challenges, learners should have foundatio
 | 28-gridTrip            |            |                       | [code](./solution-code/README.md/#challenge-28-gridtrip) |
 | 29-addChecker          |            |                       | [code](./solution-code/README.md/#challenge-29-addchecker) |
 | 30-totalTaskTime       |            |                       | [code](./solution-code/README.md/#challenge-30-totaltasktime) |
-
 
 ## Internal resources
 
