@@ -1,4 +1,4 @@
-# ![[tktk Module Name] - Setup](./assets/hero.png)
+# ![Daily Coding Challenges - Setup](./assets/hero.png)
 
 ## Setup
 
@@ -16,7 +16,6 @@ cd [tktk-module-name]
 ```
 
 <!-- Other setup instructions here -->
-
 
 Open the contents of the directory in VSCode:
 

@@ -1,13 +1,6 @@
-# ![[tktk Module Name] - References](./assets/hero.png)
+# ![Daily Coding Challenges - References](./assets/hero.png)
 
-## Lesson references
-
-- [tktk descriptive name of link]()
-- [tktk descriptive name of link]()
-- [tktk descriptive name of link]()
-
-## Level Up references
+## References
 
 - [tktk descriptive name of link]()
-- [tktk descriptive name of link]()
-- [tktk descriptive name of link]()
+
