@@ -1,9 +1,8 @@
-# ![Daily Coding Challenges - Solution Code](./assets/hero.png)
+# ![Daily Coding Challenges - Solution Code](../assets/solution-code.png)
 
 ## Solution Code
 
 *Please note that the solutions provided for these coding challenges represent just one of many possible approaches to solving them. In programming, there are often multiple ways to achieve the same outcome, each with its own trade-offs in terms of efficiency, readability, and complexity. We encourage learners to explore alternative solutions and techniques as they grow in their coding journey.*
-
 
 ### Challenge: 00-sayHello (example)
 

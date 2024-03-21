@@ -1,4 +1,4 @@
-# ![Daily Coding Challenges](./assets/tktk-hero.png)
+# ![Daily Coding Challenges](./assets/hero.png)
 
 ## About
 
