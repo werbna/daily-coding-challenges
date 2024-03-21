@@ -2,7 +2,7 @@
 
 ## About
 
-This series of coding challenges is meant to supplement the student learning journey. The content ranges from fundamental JavaScript topics, such as basic syntax and data types, to more advanced subjects, including array and object manipulation. These challenges are designed to progressively build the learners' skills, offering a diverse array of tasks that cater to both beginners and those looking to reinforce existing language skills. The challenges start with simpler tasks and gradually increase in complexity.
+This series of coding challenges is meant to supplement the student learning journey. The content ranges from fundamental JavaScript topics, such as basic syntax and data types, to more advanced subjects like array and object manipulation. These challenges are designed to progressively build the learners' skills, offering a diverse array of tasks that cater to both beginners and those looking to reinforce existing language skills. The challenges start with simpler tasks and gradually increase in complexity. The estimated difficulty of each challenge will be provided next to its name. 
 
 ## Prerequisites
 
