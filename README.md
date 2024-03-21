@@ -38,6 +38,12 @@ To successfully complete these coding challenges, learners should have foundatio
 3. **Save Your Progress**:
     - As you complete challenges, frequently **add** and **commit** your changes to your local repository.
     - **Push** your updates to the GitHub repository regularly to save and share your progress.
+  
+4. **Accessing Solution Code**:
+    - Solution code is available for reference. If you find yourself stuck, feel free to review these solutions. However, we strongly recommend trying to solve the challenges on your own first, as this is the best way to learn and improve your problem-solving skills.
+
+5. **Video Walkthroughs**:
+    - For some challenges, video walkthroughs are provided. These can be an excellent resource for understanding the problem-solving process and getting insights into different approaches. Use these videos to guide your learning, especially for more complex challenges.
 
 ## Coding Challenges
 
