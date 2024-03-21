@@ -8,7 +8,7 @@ This series of coding challenges is meant to supplement the student learning jou
 ## Instructions
 
 1. **Getting Started**:
-    - **Fork** and **Clone** this repository to your local machine.
+    - **Fork** and **Clone** [this repository](https://git.generalassemb.ly/modular-curriculum-all-courses/daily-coding-challenges) to your local machine.
 
 1. **Solving Challenges**:
     - Solve each challenge in the `challenges.js` file. This is the only file you need to modify.
