@@ -43,6 +43,7 @@ addOne(-5) //=> -4
 -----------------------------------------------------------------------------*/
 // Your solution for 01-addOne here:
 
+const addOne = (x) => x + 1;
 
 
 
@@ -72,7 +73,12 @@ addTwoNumbers('Hello', 5) //=> NaN
 -----------------------------------------------------------------------------*/
 // Your solution for 02-addTwoNumbers here:
 
-
+let addTwoNumbers = (num1, num2) => {
+  if (Number.isNaN(Number(num1)) || Number.isNaN(Number(num2))) {
+    return NaN;
+  }
+  return Number(num1) + Number(num2);
+};
 
 
 
@@ -103,7 +109,12 @@ sumNumbers([]) //=> 0
 
 
 
-
+function sumNumbers(numbers) {
+  if (numbers.length === 0) {
+    return 0;
+  }
+  return numbers.reduce((accumulator, currentValue) => accumulator + currentValue, 0);
+}
 
 
 
@@ -132,8 +143,12 @@ addList(7,-12) //=> -5
 
 
 
-
-
+function addList(...numbers) {
+  if (numbers.length === 0) {
+    return 0;
+  }
+  return numbers.reduce((sum, num) => sum + num, 0);
+}
 
 
 
@@ -162,7 +177,12 @@ computeRemainder(10.5, 3) //=> 1.5
 -----------------------------------------------------------------------------*/
 // Your solution for 05-computeRemainder here:
 
-
+function computeRemainder(dividend, divisor) {
+  if (divisor === 0) {
+    return Infinity;
+  }
+  return dividend - Math.floor(dividend / divisor) * divisor; 
+}
 
 
 
@@ -194,7 +214,18 @@ range(5,2) //=> "First argument must be less than second"
 -----------------------------------------------------------------------------*/
 // Your solution for 06-range here:
 
+function range(start, end) {
+  if (start > end) {
+    return "First argument must be less than second";
+  }
 
+  const result = [];
+  for (let i = start; i < end; i++) {
+    result.push(i);
+  }
+
+  return result;
+}
 
 
 
@@ -220,7 +251,9 @@ reverseUpcaseString("SEI Rocks!") //=> "!SKCOR IES"
 -----------------------------------------------------------------------------*/
 // Your solution for 07-reverseUpcaseString here:
 
-
+function reverseUpcaseString(str) {
+  return str.split('').reverse().join('').toUpperCase();
+}
 
 
 
@@ -247,7 +280,12 @@ removeEnds('a') //=> "" (empty string)
 -----------------------------------------------------------------------------*/
 // Your solution for 08-removeEnds here:
 
-
+function removeEnds(str) {
+  if (str.length < 3) {
+    return '';
+  }
+  return str.substring(1, str.length - 1);
+}
 
 
 
@@ -294,8 +332,19 @@ charCount('Today is fantastic!')
 -----------------------------------------------------------------------------*/
 // Your solution for 09-charCount here:
 
+function charCount(str) {
+  const count = {};
 
+  for (let char of str) {
+    if (count[char]) {
+      count[char]++;
+    } else {
+      count[char] = 1;
+    }
+  }
 
+  return count;
+}
 
 
 
@@ -329,7 +378,9 @@ formatWithPadding(1234, '*', 3) //=> "1234"
 -----------------------------------------------------------------------------*/
 // Your solution for 10-formatWithPadding here:
 
-
+const formatWithPadding=(number, char, length)=>{
+  return number.toString().padStart(length, char);
+}
 
 
 
@@ -362,7 +413,12 @@ isPalindrome('') //=> true
 -----------------------------------------------------------------------------*/
 // Your solution for 11-isPalindrome here:
 
-
+function isPalindrome(str) {
+  let re = /[\W_]/g;
+  let lowRegStr = str.toLowerCase().replace(re,'');
+  let reverseStr = lowRegStr.split('').reverse().join('');
+  return reverseStr === lowRegStr;
+}
 
 
 
@@ -397,7 +453,28 @@ hammingDistance('abc', 'ab') //=> NaN
 -----------------------------------------------------------------------------*/
 // Your solution for 12-hammingDistance here:
 
+//parameters: str1, str2 
+// if str1 length !== str2 length then return NaN
+//accumulator = distance (let)
+//iterate over str 1 to get indexs
+// compare the character at eat index in our parameters.
+//increment distance if they are different.
+//return distance
 
+
+function hammingDistance(str1, str2){
+  if (str1.length !== str2.length) return NaN
+
+  // let distance = 0
+  // for (let i in str1){
+  //   if(str1[i] !== str2[i]) {distance++
+  //   }
+  //   return distance
+  // }
+  return [...str1].reduce((distance, char, index) => {
+    return char !== str2[index] ? distance += 1 : distance
+  }, 0)
+}
 
 
 
@@ -429,7 +506,22 @@ mumble('!A 2') //=> '!-AA-   -2222'
 -----------------------------------------------------------------------------*/
 // Your solution for 13-mumble here:
 
+//accepts single string arguments.
+//return a string  according to its position.
+//repeated sections  separated by a hyphen.
 
+function mumble(string) {
+  let result = '';
+  
+  for (let i = 0; i < string.length; i++) {
+      if (i > 0) {
+          result += '-';
+      }
+      result += string[i].repeat(i + 1);
+  }
+  
+  return result;
+}
 
 
 
@@ -459,8 +551,19 @@ fromPairs([ ['name', 'Sam"], ['age', 24], ['name', 'Sally'] ]) //=> { name: "Sal
 -----------------------------------------------------------------------------*/
 // Your solution for 14-fromPairs here:
 
+//initialize an empty object.
+//foreach key-value in pair
+//set results to value
 
+function fromPairs(pairs) {
+  const result = {} ;
 
+  for (let i = 0; i <pairs.length; i++) {
+    const [key, value] = pairs[i]
+    result[key] = value;
+  }
+  return result;
+}
 
 
 
