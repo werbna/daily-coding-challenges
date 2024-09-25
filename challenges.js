@@ -414,10 +414,9 @@ isPalindrome('') //=> true
 // Your solution for 11-isPalindrome here:
 
 function isPalindrome(str) {
-  let re = /[\W_]/g;
-  let lowRegStr = str.toLowerCase().replace(re,'');
-  let reverseStr = lowRegStr.split('').reverse().join('');
-  return reverseStr === lowRegStr;
+  let orgStr = str.toLowerCase().replace(/[\W_]/g,'');
+  let reverseStr = orgStr.split('').reverse().join('');
+  return reverseStr === orgStr;
 }
 
 
@@ -641,7 +640,11 @@ findHighestPriced([
 -----------------------------------------------------------------------------*/
 // Your solution for 16-findHighestPriced here:
 
-
+function findHighestPriced(items) {
+  return items.reduce((highest, item) =>
+    item.price > highest.price ? item : highest
+  )
+}
 
 
 
@@ -683,7 +686,14 @@ mapArray( ['rose', 'tulip', 'daisy'], function(f, i) {
 //=> ["1 - rose", "2 - tulip", "3 - daisy"]
 -----------------------------------------------------------------------------*/
 // Your solution for 17-mapArray here:
-
+function mapArray(a, cb) {
+  let result = []
+  for (let i = 0; i < a.length; i++) {
+    let v = cb(a[i], i)
+    result.push(v)
+  }
+  return result
+}
 
 
 
@@ -740,6 +750,13 @@ reduceArray( ['Yes', 'No', 'Yes', 'Maybe'], function(acc, v) {
 -----------------------------------------------------------------------------*/
 // Your solution for 18-reduceArray here:
 
+function reduceArray(arr, cb, i) {
+  let acc = i;
+  for (let i = 0; i < arr.length; i++) {
+    acc = cb(acc, arr[i], i)
+  }
+  return acc
+}
 
 
 
@@ -771,15 +788,23 @@ isPrime(29) //=> true
 isPrime(200) //=> false
 -----------------------------------------------------------------------------*/
 // Your solution for 19-isPrime here:
-
-
-
-
-
-
-
-
-
+function isPrime(n) {
+  if (!Number.isInteger(n) || n < 2) {
+    return false;
+  }
+  if (n === 2) {
+    return true;
+  }
+  if (n % 2 === 0) {
+    return false;
+  }
+  for (let i = 3; i <= Math.sqrt(n); i += 2) {
+    if (n % i === 0) {
+      return false;
+    }
+  }
+  return true;
+}
 
 /*-----------------------------------------------------------------
 Challenge: 20-primeFactors
@@ -801,14 +826,33 @@ Hint: Code a nested isPrime(n) helper function that returns true if n is prime, 
 -----------------------------------------------------------------*/
 // Your solution for 20-primeFactors here:
 
+function primeFactors(num) {
+  function isPrime(n) {
+      if (n < 2) return false;
+      for (let i = 2; i <= Math.sqrt(n); i++) {
+          if (n % i === 0) return false;
+      }
+      return true;
+  }
 
+  if (!Number.isInteger(num) || num <= 1) return [];
 
+  let factors = [];
+  let divisor = 2;
 
+  while (num > 1) {
+      if (num % divisor === 0) {
+          factors.push(divisor);
+          num = num / divisor;
+      } else {
+          do {
+              divisor++;
+          } while (!isPrime(divisor));
+      }
+  }
 
-
-
-
-
+  return factors;
+}
 
 /*-----------------------------------------------------------------------------
 Challenge: 21-intersection
@@ -836,7 +880,19 @@ intersection([1, 'a', true, 1, 1], [true, 1, 'b', 1]) //=> [1, true, 1]
 // Your solution for 21-intersection here:
 
 
+function intersection(arr1, arr2) {
+  let arr2Copy = [...arr2];
+  let result = [];
 
+  for (let el of arr1) {
+      let index = arr2Copy.indexOf(el);
+      if (index !== -1) {
+          result.push(el);
+          arr2Copy.splice(index, 1);
+    }
+  }
+  return result;
+}
 
 
 
@@ -864,13 +920,21 @@ flatten( [1, [2, [3, [4]]], 1, 'a', ['b', 'c']] );
 // Your solution for 22-flatten here:
 
 
+function flatten(arr) {
+  let result = [];
 
+  // Recursive function to handle nested arrays
+  for (let el of arr) {
+      if (Array.isArray(el)) {
+          // Recursively flatten the nested array
+          result = result.concat(flatten(el));
+      } else {
+          result.push(el);  // Push non-array elements directly
+      }
+  }
 
-
-
-
-
-
+  return result;
+}
 
 /*-----------------------------------------------------------------------------
 Challenge: 23-balancedBrackets
@@ -894,14 +958,30 @@ balancedBrackets( '[({}[])]' ) // => true
 -----------------------------------------------------------------------------*/
 // Your solution for 23-balancedBrackets here:
 
+function balancedBrackets(str) {
+  let stack = [];
+  let matchingBraces = {
+      ')': '(',
+      ']': '[',
+      '}': '{'
+  };
 
+  for (let char of str) {
+      // If it's an opening brace, push to the stack
+      if (char === '(' || char === '[' || char === '{') {
+          stack.push(char);
+      } 
+      // If it's a closing brace, check if it matches the last opening brace
+      else if (char === ')' || char === ']' || char === '}') {
+          if (stack.length === 0 || stack.pop() !== matchingBraces[char]) {
+              return false;
+          }
+      }
+  }
 
-
-
-
-
-
-
+  // If the stack is empty, all braces were matched
+  return stack.length === 0;
+}
 
 /*-----------------------------------------------------------------------------
 Challenge: 24-isWinningTicket
@@ -929,14 +1009,28 @@ isWinningTicket( [ ['ABC', 66], ['dddd', 15], ['Hello', 108] ] ) // => false
 -----------------------------------------------------------------------------*/
 // Your solution for 24-isWinningTicket here:
 
-
-
-
-
-
-
-
-
+function isWinningTicket(ticket) {
+  // Loop through each nested array
+  for (let [str, code] of ticket) {
+      let hasMatchingChar = false;
+      
+      // Check if any character in the string has a charCode that matches the code
+      for (let char of str) {
+          if (char.charCodeAt(0) === code) {
+              hasMatchingChar = true;
+              break;
+          }
+      }
+      
+      // If no character matched for this nested array, return false
+      if (!hasMatchingChar) {
+          return false;
+      }
+  }
+  
+  // If all nested arrays passed the check, return true
+  return true;
+}
 
 /*-----------------------------------------------------------------------------
 Challenge: 25-getNumForIP
@@ -964,14 +1058,19 @@ getNumForIP( '10.0.0.1' ) // => 167772161
 -----------------------------------------------------------------------------*/
 // Your solution for 25-getNumForIP here:
 
-
-
-
-
-
-
-
-
+function getNumForIP(ip) {
+  // Split the IP address into its 4 parts
+  let parts = ip.split('.').map(Number); // Convert each part to a number
+  
+  // Calculate the numeric value
+  let num = 0;
+  for (let i = 0; i < parts.length; i++) {
+      // 256 raised to the power of (3 - i) gives us the correct multiplier
+      num += parts[i] * (256 ** (3 - i));
+  }
+  
+  return num;
+}
 
 /*-----------------------------------------------------------------------------
 Challenge: 26-toCamelCase
@@ -998,14 +1097,10 @@ toCamelCase( 'A_b_c' ) // => 'ABC'
 -----------------------------------------------------------------------------*/
 // Your solution for 26-toCamelCase here:
 
-
-
-
-
-
-
-
-
+function toCamelCase(str) {
+  // Use replace with a regular expression to find _ or - followed by a character
+  return str.replace(/[-_](.)/g, (_, char) => char.toUpperCase());
+}
 
 /*-----------------------------------------------------------------------------
 Challenge: 27-countTheBits
@@ -1033,14 +1128,20 @@ countTheBits( 65535 ) //=> 16
 -----------------------------------------------------------------------------*/
 // Your solution for 27-countTheBits here:
 
-
-
-
-
-
-
-
-
+function countTheBits(num) {
+  // Convert the number to its binary representation using toString(2)
+  let binary = num.toString(2);
+  
+  // Count how many '1's are in the binary string
+  let count = 0;
+  for (let bit of binary) {
+      if (bit === '1') {
+          count++;
+      }
+  }
+  
+  return count;
+}
 
 /*-----------------------------------------------------------------------------
 Challenge: 28-gridTrip
@@ -1067,14 +1168,38 @@ gridTrip( [100, -22], 'L2L15D50U1D9') //=> [83, -80]
 -----------------------------------------------------------------------------*/
 // Your solution for 28-gridTrip here:
 
-
-
-
-
-
-
-
-
+function gridTrip(startPos, moves) {
+  // Initialize x and y from the starting position
+  let [x, y] = startPos;
+  
+  // Match all moves using a regular expression
+  let moveArray = moves.match(/[UDRL]\d+/g);
+  
+  // Iterate over each move
+  for (let move of moveArray) {
+      let direction = move[0];  // The first character (U, D, R, L)
+      let value = parseInt(move.slice(1), 10);  // The rest of the string (number of units)
+      
+      // Adjust the x or y position based on the direction
+      switch (direction) {
+          case 'U':
+              y += value;
+              break;
+          case 'D':
+              y -= value;
+              break;
+          case 'R':
+              x += value;
+              break;
+          case 'L':
+              x -= value;
+              break;
+      }
+  }
+  
+  // Return the final coordinates
+  return [x, y];
+}
 
 /*-----------------------------------------------------------------------------
 Challenge: 29-addChecker
@@ -1102,14 +1227,22 @@ addChecker( [10, 15, 16, 22], 19 ) // => false
 -----------------------------------------------------------------------------*/
 // Your solution for 29-addChecker here:
 
-
-
-
-
-
-
-
-
+function addChecker(arr, target) {
+  let left = 0;
+  let right = arr.length - 1;
+  while (left < right) {
+      let sum = arr[left] + arr[right];
+      
+      if (sum === target) {
+          return true;
+      } else if (sum < target) {
+          left++;
+      } else {
+          right--;
+      }
+  }
+  return false;
+}
 
 /*-----------------------------------------------------------------------------
 Challenge: 30-totalTaskTime
@@ -1143,7 +1276,30 @@ totalTaskTime( [5, 2, 6, 8, 7, 2], 3 ) // => 12
 -----------------------------------------------------------------------------*/
 // Your solution for 30- here:
 
+function totalTaskTime(queue, threads) {
+  let threadLoads = Array(threads).fill(0);
+  
+  const heapify = (arr) => {
+      arr.sort((a, b) => a - b);
+  };
+  
+  const heapInsert = (arr, val) => {
+      arr.push(val);
+      arr.sort((a, b) => a - b);
+  };
+  
+  heapify(threadLoads);
 
+  for (let task of queue) {
+      let nextAvailable = threadLoads.shift(); 
+
+      nextAvailable += task;
+
+      heapInsert(threadLoads, nextAvailable);
+  }
+
+  return Math.max(...threadLoads);
+}
 
 
 
